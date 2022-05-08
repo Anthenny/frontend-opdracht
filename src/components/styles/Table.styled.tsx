@@ -8,7 +8,6 @@ export const StyledTable = styled.table`
   box-shadow: 0 5px 10px gray;
   background-color: white;
   text-align: left;
-  overflow: hidden;
 
   thead {
     box-shadow: 0 5px 10px gray;
@@ -18,21 +17,35 @@ export const StyledTable = styled.table`
       padding: 0.8rem 1.6rem;
       text-transform: uppercase;
       letter-spacing: 0.1rem;
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: 400;
+      cursor: pointer;
+      transition: 0.2s ease;
 
-      button {
-        margin-left: 0.6rem;
-        padding: 0.3rem 1rem;
-        cursor: pointer;
-        text-align: center;
+      &:hover{
+        background-color: ${({theme}) => theme.colors.orange};
+        color: ${({theme}) => theme.colors.white};
       }
     }
   }
 
+  thead, tbody tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;/* even columns width , fix width of table too*/
+}
+
+  tbody{
+    display: block;
+    height: 55vh;
+    overflow-y: scroll;
+
+    
+  }
+
   td {
     padding: 1rem 2rem;
-    font-size: 1.2rem;
+    font-size: .9rem;
   }
 
   tr:nth-child(even) {

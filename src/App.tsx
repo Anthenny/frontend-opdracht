@@ -8,6 +8,7 @@ import Container from "./components/styles/Container.styled";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import data from "./data/mock-data.json";
+import { StyledForm } from "./components/styles/Form.styled";
 
 type CvsArray = typeof data;
 
@@ -63,8 +64,9 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Container>
-        <Navbar />
-        <form id="csv-form">
+        <h1> Upload uw csv file!</h1>
+        <StyledForm id="csv-form">
+          <label>
           <input
             type="file"
             accept=".csv"
@@ -74,6 +76,7 @@ function App() {
               setCsvFile(e.target.files[0]);
             }}
           ></input>
+          </label>
           <br />
           <button
             onClick={(e) => {
@@ -82,9 +85,8 @@ function App() {
           >
             Submit
           </button>
-        </form>
+        </StyledForm>
         {csvArray.length > 0 ? <Table csvArray={csvArray} /> : null}
-        <Footer />
       </Container>
     </ThemeProvider>
   );

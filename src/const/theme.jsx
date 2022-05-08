@@ -11,5 +11,5 @@ const theme = {
   laptop: "1380px",
   tablet: "960px",
 };
-
+ 
 export default theme;

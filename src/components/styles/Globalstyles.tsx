@@ -12,7 +12,7 @@ const GlobalStyles = createGlobalStyle<BasicStyle>`
 * {
     box-sizing: border-box;
 }
-
+ 
 html {
     font-size: 62.5;
 }
@@ -20,11 +20,9 @@ html {
 body {
     background: ${({ theme }) => theme.colors.white};
     font-family: 'Poppins', sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     margin: 0;
     padding: 0;
-
-    // TODO Media query voor laptop en vervolgens voor tablet
 
     @media(max-width: ${({ theme }) => theme.laptop}){
         font-size: 1.1rem;

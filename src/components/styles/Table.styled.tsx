@@ -6,7 +6,7 @@ export const StyledTable = styled.table`
   margin-bottom: 5rem;
   border-collapse: collapse;
   box-shadow: 0 5px 10px gray;
-  background-color: white;
+  background-color: ${({theme}) => theme.colors.white};
   text-align: left;
 
   thead {
@@ -38,9 +38,7 @@ export const StyledTable = styled.table`
   tbody{
     display: block;
     height: 55vh;
-    overflow-y: scroll;
-
-    
+    overflow-y: scroll;    
   }
 
   td {

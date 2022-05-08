@@ -5,8 +5,6 @@ import theme from "./const/theme";
 import GlobalStyles from "./components/styles/Globalstyles";
 import Table from "./components/table/Table";
 import Container from "./components/styles/Container.styled";
-import Navbar from "./components/navbar/Navbar";
-import Footer from "./components/footer/Footer";
 import data from "./data/mock-data.json";
 import { StyledForm } from "./components/styles/Form.styled";
 
@@ -15,9 +13,10 @@ type CvsArray = typeof data;
 function App() {
   const [csvFile, setCsvFile] = useState();
   const [csvArray, setCsvArray] = useState<CvsArray>([]);
+
+  // Deze functie 
   const processCsv = (str: string, semi: string = ";") => {
-    // Split de output bij de semicolon en maak daar een array van.
-    // Output = ['id', 'first_name', 'sur_name', 'issue_count', 'date_of_birth\r']
+    // We splitten de output van de eerste rij bij de semicolon en er een array van. Ook "unshiften" we een id zodat dit vooraan in de array komt.
     const headers = str
       .slice(0, str.indexOf("\n"))
       .split(semi)
@@ -26,15 +25,15 @@ function App() {
       });
     headers.unshift("id");
 
-    //Output = ['Mauro;Drenthe;26;Nov 26, 68\r', 'Sila;Hoogsteen;31;Jun 29, 72\r', enzv..]
     const rows = str.slice(str.indexOf("\n") + 1).split("\n");
 
+    // We maken een nieuwe array waarin een object zit met de data van het csv bestand. 
     const newArray = rows.map((row: string, i: number) => {
-      //values zijn ['Mauro', 'Drenthe', '26', 'Nov 26, 68']
       const values: (string | number)[] = row.split(semi);
       values[2] = +values[2];
-
       values.unshift(i + 1);
+
+      // output van values = [1, "Mauro", "Drenthe", 26, "Nov 26, 68"]
       const eachObject = headers.reduce((obj: any, header: any, i) => {
         obj[header] = values[i];
         return obj;
@@ -45,6 +44,7 @@ function App() {
 
     setCsvArray(newArray);
   };
+
 
   const submitHandler = (e: any) => {
     e.preventDefault();
@@ -66,18 +66,14 @@ function App() {
       <Container>
         <h1> Upload uw csv file!</h1>
         <StyledForm id="csv-form">
-          <label>
           <input
             type="file"
             accept=".csv"
             id="csvFile"
-            // TODO CSV TYPE htmlelement
             onChange={(e: any) => {
               setCsvFile(e.target.files[0]);
             }}
           ></input>
-          </label>
-          <br />
           <button
             onClick={(e) => {
               submitHandler(e);

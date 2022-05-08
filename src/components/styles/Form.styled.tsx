@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const StyledForm = styled.form `
     display: flex;
     flex-direction: column;
-    // justify-content: center;
     align-items: center;
 
     button {
@@ -17,7 +16,8 @@ export const StyledForm = styled.form `
         color: ${({theme}) => theme.colors.white};
         border-radius: 4px;
         transition: 0.2s ease;
-        margin-bottom: 2rem;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
 
         &:hover {
             background-color: ${({theme}) => theme.colors.white};

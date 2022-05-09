@@ -1,5 +1,4 @@
 import { ThemeProvider } from "styled-components";
-import { useState } from "react";
 
 import theme from "./const/theme";
 import GlobalStyles from "./components/styles/Globalstyles";

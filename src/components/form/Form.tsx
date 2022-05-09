@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { StyledForm } from "../styles/Form.styled";
 import Table from "../table/Table";

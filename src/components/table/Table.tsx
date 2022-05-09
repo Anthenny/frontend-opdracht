@@ -11,13 +11,11 @@ type SortKeys = keyof CvsArray[0];
 const Table = ({ csvArray }: { csvArray: CvsArray }) => {
   const [sortKey, setSortKey] = useState<SortKeys>("sur_name");
   const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
-  const [initialLoad, setInitialLoad] = useState(true);
 
   // useEffect omdat we aan het begin willen filteren op sur_name.
   useEffect(() => {
-    if (csvArray.length > 1 && initialLoad === true) {
+    if (csvArray.length > 1) {
       sorting(sortKey);
-      setInitialLoad(false);
     }
   }, []);
 

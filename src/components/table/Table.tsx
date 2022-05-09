@@ -20,7 +20,7 @@ const Table = ({ csvArray }: { csvArray: CvsArray }) => {
       sorting(sortKey);
       setInitialLoad(false);
     }
-  }, [csvArray]);
+  }, []);
 
   const headers: { key: SortKeys; label: string }[] = [
     { key: "id", label: "ID" },
@@ -49,33 +49,33 @@ const Table = ({ csvArray }: { csvArray: CvsArray }) => {
   };
 
   return (
-      <StyledTable>
-        <thead>
-          <tr>
-            {headers.map((row) => {
-              return (
-                <th key={row.key} onClick={() => sorting(row.key)}>
-                  {row.label}
-                </th>
-              );
-            })}
-          </tr>
-        </thead>
-
-        <tbody>
-          {csvArray.map((person) => {
+    <StyledTable>
+      <thead>
+        <tr>
+          {headers.map((row) => {
             return (
-              <tr key={person.id}>
-                <td>{person.id}</td>
-                <td>{person.first_name}</td>
-                <td>{person.sur_name}</td>
-                <td>{person.issue_count}</td>
-                <td>{person.date_of_birth}</td>
-              </tr>
+              <th key={row.key} onClick={() => sorting(row.key)}>
+                {row.label}
+              </th>
             );
           })}
-        </tbody>
-      </StyledTable>
+        </tr>
+      </thead>
+
+      <tbody>
+        {csvArray.map((person) => {
+          return (
+            <tr key={person.id}>
+              <td>{person.id}</td>
+              <td>{person.first_name}</td>
+              <td>{person.sur_name}</td>
+              <td>{person.issue_count}</td>
+              <td>{person.date_of_birth}</td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </StyledTable>
   );
 };
 

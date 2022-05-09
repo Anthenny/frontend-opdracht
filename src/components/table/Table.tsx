@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-
 import { StyledTable } from "../styles/Table.styled";
 import data from "../../data/mock-data.json";
 
@@ -11,7 +10,7 @@ type SortKeys = keyof CvsArray[0];
 
 const Table = ({ csvArray }: { csvArray: CvsArray }) => {
   const [sortKey, setSortKey] = useState<SortKeys>("sur_name");
-  const [sortOrder, setSortOrder] = useState<SortOrder>("asc");
+  const [sortOrder, setSortOrder] = useState<SortOrder>("desc");
   const [initialLoad, setInitialLoad] = useState(true);
 
   // useEffect omdat we aan het begin willen filteren op sur_name.
@@ -31,51 +30,61 @@ const Table = ({ csvArray }: { csvArray: CvsArray }) => {
   ];
 
   const sorting = (key: SortKeys = sortKey) => {
-    if (sortOrder === "asc") {
-      const sorted = csvArray.sort((a, b) => (a[key] > b[key] ? 1 : -1));
-      setSortKey(key);
-      setSortOrder("desc");
-
-      return sorted;
-    }
-
     if (sortOrder === "desc") {
-      const sorted = csvArray.sort((a, b) => (a[key] < b[key] ? 1 : -1));
+      const sorted = csvArray.sort((a, b) => (a[key] > b[key] ? 1 : -1));
+
       setSortKey(key);
       setSortOrder("asc");
 
       return sorted;
     }
-  };
 
+    if (sortOrder === "asc") {
+      const sorted = csvArray.sort((a, b) => (a[key] < b[key] ? 1 : -1));
+      setSortKey(key);
+      setSortOrder("desc");
+
+      return sorted;
+    }
+  };
   return (
-    <StyledTable>
-      <thead>
-        <tr>
-          {headers.map((row) => {
+    <>
+      <h2>
+        U sorteert op: {sortKey} en de volgorde is {sortOrder}
+      </h2>
+      <StyledTable>
+        <thead>
+          <tr>
+            {headers.map((row) => {
+              return (
+                <th key={row.key} onClick={() => sorting(row.key)}>
+                  {row.label}
+                </th>
+              );
+            })}
+          </tr>
+        </thead>
+
+        <tbody>
+          {csvArray.map((person) => {
+            const date = new Date(person.date_of_birth).toLocaleString("en-us", {
+              month: "short",
+              year: "numeric",
+              day: "numeric",
+            });
             return (
-              <th key={row.key} onClick={() => sorting(row.key)}>
-                {row.label}
-              </th>
+              <tr key={person.id}>
+                <td>{person.id}</td>
+                <td>{person.first_name}</td>
+                <td>{person.sur_name}</td>
+                <td>{person.issue_count}</td>
+                <td>{date}</td>
+              </tr>
             );
           })}
-        </tr>
-      </thead>
-
-      <tbody>
-        {csvArray.map((person) => {
-          return (
-            <tr key={person.id}>
-              <td>{person.id}</td>
-              <td>{person.first_name}</td>
-              <td>{person.sur_name}</td>
-              <td>{person.issue_count}</td>
-              <td>{person.date_of_birth}</td>
-            </tr>
-          );
-        })}
-      </tbody>
-    </StyledTable>
+        </tbody>
+      </StyledTable>
+    </>
   );
 };
 

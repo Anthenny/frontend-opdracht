@@ -3,10 +3,10 @@ import styled from "styled-components";
 export const StyledTable = styled.table`
   width: auto;
   margin: 0 auto;
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
   border-collapse: collapse;
   box-shadow: 0 5px 10px gray;
-  background-color: ${({theme}) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.white};
   text-align: left;
 
   thead {
@@ -22,28 +22,16 @@ export const StyledTable = styled.table`
       cursor: pointer;
       transition: 0.2s ease;
 
-      &:hover{
-        background-color: ${({theme}) => theme.colors.orange};
-        color: ${({theme}) => theme.colors.white};
+      &:hover {
+        background-color: ${({ theme }) => theme.colors.orange};
+        color: ${({ theme }) => theme.colors.white};
       }
     }
   }
 
-  thead, tbody tr {
-    display: table;
-    width: 100%;
-    table-layout: fixed;/* even columns width , fix width of table too*/
-}
-
-  tbody{
-    display: block;
-    height: 55vh;
-    overflow-y: scroll;    
-  }
-
   td {
     padding: 1rem 2rem;
-    font-size: .9rem;
+    font-size: 0.9rem;
   }
 
   tr:nth-child(even) {
